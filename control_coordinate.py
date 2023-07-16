@@ -47,14 +47,15 @@ def move_process(i,n):
 
 while True:
     i,n = map(int,input().split())
-  
     move_process(i,n)
+    print(f"Move value : {move_value(mmap)}")
+    print(mmap)
     # -------------------------------------------------------------- to arduino
     # if move_value(mmap) == -3: py_serial.write(str('a').encode())
     # if move_value(mmap) == 3: py_serial.write(str('b').encode())
     # if move_value(mmap) == 1: py_serial.write(str('c').encode())
     # if move_value(mmap) == -1: py_serial.write(str('d').encode())
     # ---------------------------------------------------------------
-    print(move_value(mmap))
+    
 
 
