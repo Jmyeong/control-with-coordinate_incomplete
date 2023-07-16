@@ -1,4 +1,5 @@
 # 이제 지정한 좌표로 이동하게 만들자! - 0716
+# 방향전환 각도 표시에 문제 있음
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -55,6 +56,8 @@ def move_process(i,n):
 def X_Y_move(mmap):
     global pre_x
     global pre_y
+    global x_angle_val
+    global y_angle_val
     x_angle_val = 0
     y_angle_val = 0
     x_axis = np.where(mmap == 1)[1][0]
@@ -72,11 +75,27 @@ def X_Y_move(mmap):
     pre_y = y_axis
     print(x_axis, y_axis)
     
+def angle(x_angle_val,y_angle_val):
+    x_angle = 0
+    y_angle = 0
+    if x_angle_val == 'LEFT': x_angle = -90
+    elif x_angle_val == 'RIGHT': x_angle = 90
+    if y_angle_val == 'UP': y_angle = 90
+    elif y_angle_val == 'DOWN': y_angle = -90
+    
+    if abs(x_angle) == abs(y_angle): 
+        if x_angle < 0 or y_angle < 0: return -(abs(x_angle) + abs(y_angle))//4
+        elif x_angle > 0 or y_angle > 0: return (x_angle + y_angle)//4
+    else: return x_angle + y_angle
+
+    
 while True:
     i,n = map(int,input().split())
     move_process(i,n)
     print(mmap)
     X_Y_move(mmap)
+    print(angle(x_angle_val,y_angle_val))
+    
     
     # if move_value(mmap) == -3: py_serial.write(str('a').encode())
     # if move_value(mmap) == 3: py_serial.write(str('b').encode())
